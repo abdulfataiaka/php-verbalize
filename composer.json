@@ -1,0 +1,24 @@
+{
+    "name": "leickon/php-action",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.0.1",
+    "description": "types definition package",
+    "authors": [
+        {
+            "name": "abdulfataiaka",
+            "email": "abdulfataiaka@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "classmap": [],
+        "psr-4": {
+            "Leickon\\Action\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2"
+    }
+}
