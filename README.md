@@ -20,8 +20,8 @@ use Leickon\Action\Action;
 
 class ExampleAction extends Action {
   protected function init() {
-    $this->require('name');
-    $this->optional('age', 20);
+    $this->input('name');
+    $this->input('age', 20);
   }
 
   protected function define() {
@@ -40,6 +40,7 @@ class ExampleAction extends Action {
 ```php
 
 // Throws : name required exception
+// Age is optional since it has a default value
 
 ExampleAction::call();
 
@@ -79,4 +80,6 @@ $result->value; // 'Age is less than 10'
 
 Abdulfatai Aka
 
-*[Andela](https://andela.com/)* . *[Decagon Institute](https://decagonhq.com/)* . *[Ascent Technologies](https://www.ascentregtech.com/)*
+abdulfataiaka@gmail.com
+
+*[Andela](https://andela.com/)* &nbsp;|&nbsp; *[Decagon Institute](https://decagonhq.com/)* &nbsp;|&nbsp; *[Ascent Technologies](https://www.ascentregtech.com/)*

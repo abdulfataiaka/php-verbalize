@@ -4,31 +4,29 @@ namespace Leickon\Action;
 
 use StdClass;
 use Leickon\Action\RequiredException;
+use Leickon\Action\BadInputArgsException;
 
 trait Concern {
   /**
-   * Define a required parameter
+   * Define a expected inputs
    * 
-   * @param string $param Parameter name
+   * @param array[string,any?] $args
    * 
    * @api
    * @return void
    */
-  protected function require(string $param) {
-    $this->params[$param] = [false, null];
-  }
+  protected function input(...$args) {
+    if(
+      !in_array(count($args), [1, 2]) ||
+      !is_string($args[0]) ||
+      !strlen(trim($args[0]))
+    ) throw new BadInputArgsException();
 
-  /**
-   * Define an optional parameter
-   * 
-   * @param string $param Parameter name
-   * @param any $default Alternative value
-   * 
-   * @api
-   * @return void
-   */
-  protected function optional(string $param, $default = null) {
-    $this->params[$param] = [true, $default];
+    $name = trim($args[0]);
+    $require = count($args) === 1;
+    $default = count($args) === 1 ? null : $args[1];
+
+    $this->params[$name] = [$require, $default];
   }
 
   /**
@@ -41,11 +39,13 @@ trait Concern {
    * @throws RequiredException
    */
   private function setup(array $input) {
-    foreach($this->params as $name => [$optional, $default]) {
+    foreach($this->params as $name => [$require, $default]) {
       $exists = array_key_exists($name, $input);
 
-      if(!$exists && !$optional) {
-        throw new RequiredException("{ $name : required }");
+      if(!$exists && $require) {
+        throw new RequiredException(
+          "Action input { $name } is required"
+        );
       }
 
       $this->$name = !$exists ? $default : $input[$name];
