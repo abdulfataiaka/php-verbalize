@@ -2,7 +2,7 @@
 
 Making classes into actions
 
-## Installation
+### Installation
 
 ```bash
 
@@ -12,7 +12,7 @@ $ composer require leickon/php-action
 
 ```
 
-## Define Action Class
+### Define Action Class
 
 ```php
 
@@ -35,7 +35,7 @@ class ExampleAction extends Action {
 
 ```
 
-## Execute : No Parameters
+### Execute : No Parameters
 
 ```php
 
@@ -46,7 +46,7 @@ ExampleAction::call();
 
 ```
 
-## Execute : Age Optional
+### Execute : Age Optional
 
 ```php
 
@@ -57,7 +57,7 @@ $result->value; // ['John', 20]
 
 ```
 
-## Execute : Age Not Optional
+### Execute : Age Not Optional
 
 ```php
 $result = ExampleAction::call(['name' => 'John', 'age' => 60]);
@@ -65,7 +65,7 @@ $result->value; // ['John', 60]
 
 ```
 
-## Execute : Failing Action
+### Execute : Failing Action
 
 ```php
 
@@ -76,6 +76,6 @@ $result->value; // 'Age is less than 10'
 
 ```
 
-# Authors
+### Authors
 
-Abdulfatai Aka - <abdulfataiaka@gmail.com> | [Andela](https://andela.com/) &nbsp;|&nbsp; [Decagon Institute](https://decagonhq.com/) &nbsp;|&nbsp; [Ascent Technologies](https://www.ascentregtech.com/)
+Abdulfatai Aka - <abdulfataiaka@gmail.com> | Software engineer at [Ascent Technologies](https://www.ascentregtech.com/)
