@@ -3,59 +3,30 @@
 namespace Leickon\Action;
 
 use StdClass;
-use Leickon\Action\RequiredException;
-use Leickon\Action\BadInputArgsException;
+use Leickon\Action\FailureException;
+
+class RequiredException extends Exception {}
+class BadInputArgsException extends Exception {}
 
 trait Concern {
   /**
-   * Define a expected inputs
-   * 
-   * @param array[string,any?] $args
-   * 
-   * @api
-   * @return void
-   */
-  protected function input(...$args) {
-    if(
-      !in_array(count($args), [1, 2]) ||
-      !is_string($args[0]) ||
-      !strlen(trim($args[0]))
-    ) throw new BadInputArgsException();
-
-    $name = trim($args[0]);
-    $require = count($args) === 1;
-    $default = count($args) === 1 ? null : $args[1];
-
-    $this->params[$name] = [$require, $default];
-  }
-
-  /**
-   * Bind attributes to action object
-   * 
-   * @param array $input Values to be used by procedure
+   * Parse and bind attributes to object
    * 
    * @internal
    * @return void
    * @throws RequiredException
    */
-  private function setup(array $input) {
-    foreach($this->params as $name => [$require, $default]) {
-      $exists = array_key_exists($name, $input);
-
-      if(!$exists && $require) {
-        throw new RequiredException(
-          "Action input { $name } is required"
-        );
-      }
-
-      $this->$name = !$exists ? $default : $input[$name];
-    }
+  private function parseInput()
+  {
+    // Read static::INPUT and bind attributes to instance
+    // Validate attribute name format
+    // Consider integer index and string index
   }
 
   /**
    * Start the action procedure
    * 
-   * @param array $input Values to be used by procedure
+   * @param input<array>
    * 
    * @api
    * @return StdClass
@@ -63,13 +34,13 @@ trait Concern {
   public static function call(array $input = []) {
     $instance = new static();
     $result = new StdClass();
-    $instance->init();
-    $instance->setup($input);
+    $instance->parseInput($input);
+    $instance->initialize();
 
     try {
       $result->success = true;
       $result->value = $instance->define();
-    } catch(Failure $exc) {
+    } catch(FailureException $exc) {
       $result->success = false;
       $result->error = $exc->value;
     }

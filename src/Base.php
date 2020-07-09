@@ -6,23 +6,33 @@ use BadMethodCallException;
 use Leickon\Action\Concern;
 use Leickon\Action\FailureException;
 
-class Action {
+class Base
+{
   use Concern;
 
   /**
-   * Array of parameters
+   * Context attribute initializer
    * 
-   * @property array[[boolean,any]]
+   * @property StdClass
    */
-  private $params;
+  protected $context;
 
   /**
-   * Initialize the parameters array
+   * Array of action inputs
+   * 
+   * @property array[field|field=>default]
+   */
+  protected const INPUT = [];
+
+  /**
+   * Disallow instantiation of actions
+   * Initialize context object
    * 
    * @method
    */
-  private function __construct() {
-    $this->params = [];
+  private function __construct()
+  {
+    $this->context = new StdClass();
   }
 
   /**
@@ -31,8 +41,8 @@ class Action {
    * @api
    * @return void
    */
-  protected function init() {
-    //=! Do nothing when not defined
+  protected function initialize() {
+    // Do nothing when not defined
   }
 
   /**
