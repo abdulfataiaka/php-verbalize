@@ -3,24 +3,42 @@
 namespace Leickon\Action;
 
 use StdClass;
+use Exception;
 use Leickon\Action\FailureException;
 
 class RequiredException extends Exception {}
-class BadInputArgsException extends Exception {}
+class BadInputException extends Exception {}
+class InputRequiredException extends Exception {}
 
 trait Concern {
   /**
    * Parse and bind attributes to object
    * 
+   * @param input<array>
    * @internal
    * @return void
    * @throws RequiredException
    */
-  private function parseInput()
+  private function marshal($input)
   {
-    // Read static::INPUT and bind attributes to instance
-    // Validate attribute name format
-    // Consider integer index and string index
+    foreach(static::INPUT as $name => $default) {
+      $required = false;
+
+      if(is_int($name)) {
+        $name = $default;
+        $required = true;
+      }
+
+      if(
+        !is_string($name) ||
+        !preg_match('/^[A-Za-z]+?\d*?$/', $name) ||
+        ($required && !array_key_exists($name, $input))
+      ) throw new BadInputException($name);
+
+      $this->$name = array_key_exists($name, $input)
+        ? $input[$name]
+        : $default;
+    }
   }
 
   /**
@@ -33,9 +51,10 @@ trait Concern {
    */
   public static function call(array $input = []) {
     $instance = new static();
+    $instance->marshal($input);
+    $instance->init();
+
     $result = new StdClass();
-    $instance->parseInput($input);
-    $instance->initialize();
 
     try {
       $result->success = true;

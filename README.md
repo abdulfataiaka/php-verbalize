@@ -1,12 +1,12 @@
-# Action
+# PHP Action
 
-Making classes into actions
+Making classes into actions by creating a PHP flavour of [verbalize](https://github.com/taylorzr/verbalize), which is an attempt to implement the interactor design pattern.
 
 ### Installation
 
 ```bash
 
-# Ensure composer can access repository
+# Ensure composer can access leickon repository
 
 $ composer require leickon/php-action
 
@@ -16,16 +16,20 @@ $ composer require leickon/php-action
 
 ```php
 
-use Leickon\Action\Action;
+use Leickon\Action\Base as Action;
 
 class ExampleAction extends Action {
+  protected const INPUT = [
+    'name',
+    'age' => 20,
+  ];
+
   protected function init() {
-    $this->input('name');
-    $this->input('age', 20);
+    $this->data = [$this->age];
   }
 
   protected function define() {
-    if ($this->age < 10) {
+    if ($this->data[0] < 10) {
       $this->fail('Age is less than 10');
     }
 
@@ -39,14 +43,11 @@ class ExampleAction extends Action {
 
 ```php
 
-// Throws : name required exception
-// Age is optional since it has a default value
-
-ExampleAction::call();
+ExampleAction::call(); // throws name required exception
 
 ```
 
-### Execute : Age Optional
+### Execute : Name Provided
 
 ```php
 
@@ -57,10 +58,14 @@ $result->value; // ['John', 20]
 
 ```
 
-### Execute : Age Not Optional
+### Execute : Name & Age Provided
 
 ```php
-$result = ExampleAction::call(['name' => 'John', 'age' => 60]);
+
+$result = ExampleAction::call([
+  'name' => 'John', 'age' => 60
+]);
+
 $result->value; // ['John', 60]
 
 ```
@@ -69,13 +74,21 @@ $result->value; // ['John', 60]
 
 ```php
 
-$result = ExampleAction::call(['name' => 'John', 'age' => 2]);
+$result = ExampleAction::call([
+  'name' => 'John',
+  'age' => 2
+]);
+
 $result->success; // false
 $result->failure; // true
 $result->value; // 'Age is less than 10'
 
 ```
 
-### Authors
+## License
 
-Abdulfatai Aka - <abdulfataiaka@gmail.com> | Software engineer at [Ascent Technologies](https://www.ascentregtech.com/)
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Contributors
+
+[Abdulfatai Aka](mailto:abdulfataiaka@gmail.com) - [Ascent Technologies](https://www.ascentregtech.com/)

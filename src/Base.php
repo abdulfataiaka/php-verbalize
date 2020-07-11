@@ -11,13 +11,6 @@ class Base
   use Concern;
 
   /**
-   * Context attribute initializer
-   * 
-   * @property StdClass
-   */
-  protected $context;
-
-  /**
    * Array of action inputs
    * 
    * @property array[field|field=>default]
@@ -26,14 +19,10 @@ class Base
 
   /**
    * Disallow instantiation of actions
-   * Initialize context object
    * 
    * @method
    */
-  private function __construct()
-  {
-    $this->context = new StdClass();
-  }
+  private function __construct() {}
 
   /**
    * Define desired parameters
@@ -41,9 +30,7 @@ class Base
    * @api
    * @return void
    */
-  protected function initialize() {
-    // Do nothing when not defined
-  }
+  protected function init() {}
 
   /**
    * Procedure to execute

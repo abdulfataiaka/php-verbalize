@@ -4,4 +4,4 @@ ROOTDIR="$(dirname $(cd $(dirname $0) && pwd))"
 
 cd $ROOTDIR
 
-vendor/bin/phpunit $ROOTDIR/tests
+vendor/bin/phpunit tests
