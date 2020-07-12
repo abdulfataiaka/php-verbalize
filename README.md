@@ -85,6 +85,14 @@ $result->value; // 'Age is less than 10'
 
 ```
 
+## Running Tests
+
+```bash
+
+$ ./phpunit
+
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
