@@ -1,10 +1,10 @@
 <?php
 
-namespace Leickon\Action;
+namespace Leickon\Verbalize;
 
 use StdClass;
 use Exception;
-use Leickon\Action\FailureException;
+use Leickon\Verbalize\FailureException;
 
 class BadInputException extends Exception {}
 class InputRequiredException extends Exception {}

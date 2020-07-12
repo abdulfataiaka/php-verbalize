@@ -4,9 +4,9 @@ namespace Leickon\Action\Tests;
 
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
-use Leickon\Action\InputRequiredException;
-use Leickon\Action\Tests\Factory\TestAction;
-use Leickon\Action\Tests\Factory\EmptyAction;
+use Leickon\Verbalize\InputRequiredException;
+use Leickon\Verbalize\Tests\Factory\TestAction;
+use Leickon\Verbalize\Tests\Factory\EmptyAction;
 
 class BaseTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Leickon\Action;
+namespace Leickon\Verbalize;
 
 use Exception;
 

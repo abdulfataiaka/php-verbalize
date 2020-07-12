@@ -1,5 +1,5 @@
 {
-    "name": "leickon/php-action",
+    "name": "leickon/php-verbalize",
     "type": "library",
     "license": "MIT",
     "version": "0.0.1",
@@ -13,8 +13,8 @@
     "autoload": {
         "classmap": [],
         "psr-4": {
-            "Leickon\\Action\\": "src/",
-            "Leickon\\Action\\Tests\\": "tests/"
+            "Leickon\\Verbalize\\": "src/",
+            "Leickon\\Verbalize\\Tests\\": "tests/"
         }
     },
     "require-dev": {

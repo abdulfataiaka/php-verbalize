@@ -1,22 +1,20 @@
-# PHP Action
+# PHP Verbalize
 
 Making classes into actions by creating a PHP flavour of [verbalize](https://github.com/taylorzr/verbalize), which is an attempt to implement the interactor design pattern.
 
-### Installation
+#### Installation
 
 ```bash
 
-# Ensure composer can access leickon repository
-
-$ composer require leickon/php-action
+$ composer require leickon/php-verbalize
 
 ```
 
-### Define Action Class
+#### Define Action Class
 
 ```php
 
-use Leickon\Action\Base as Action;
+use Leickon\Verbalize\Action;
 
 class ExampleAction extends Action {
   protected const INPUT = [
@@ -39,7 +37,7 @@ class ExampleAction extends Action {
 
 ```
 
-### Execute : No Parameters
+#### Execute : No Parameters
 
 ```php
 
@@ -47,7 +45,7 @@ ExampleAction::call(); // throws name required exception
 
 ```
 
-### Execute : Name Provided
+#### Execute : Name Provided
 
 ```php
 
@@ -58,7 +56,7 @@ $result->value; // ['John', 20]
 
 ```
 
-### Execute : Name & Age Provided
+#### Execute : Name & Age Provided
 
 ```php
 
@@ -70,7 +68,7 @@ $result->value; // ['John', 60]
 
 ```
 
-### Execute : Failing Action
+#### Execute : Failing Action
 
 ```php
 
@@ -82,6 +80,14 @@ $result = ExampleAction::call([
 $result->success; // false
 $result->failure; // true
 $result->value; // 'Age is less than 10'
+
+```
+
+## Running Tests
+
+```bash
+
+$ ./phpunit
 
 ```
 

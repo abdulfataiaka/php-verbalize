@@ -1,9 +1,9 @@
 <?php
 
-namespace Leickon\Action\Tests\Factory;
+namespace Leickon\Verbalize\Tests\Factory;
 
 use Exception;
-use Leickon\Action\Base as Action;
+use Leickon\Verbalize\Action;
 
 class TestAction extends Action {
   const FAIL = 'Gender value is still male';

@@ -1,12 +1,12 @@
 <?php
 
-namespace Leickon\Action;
+namespace Leickon\Verbalize;
 
 use BadMethodCallException;
-use Leickon\Action\Concern;
-use Leickon\Action\FailureException;
+use Leickon\Verbalize\Concern;
+use Leickon\Verbalize\FailureException;
 
-class Base
+class Action
 {
   use Concern;
 

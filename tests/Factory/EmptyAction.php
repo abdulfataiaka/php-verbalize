@@ -1,9 +1,9 @@
 <?php
 
-namespace Leickon\Action\Tests\Factory;
+namespace Leickon\Verbalize\Tests\Factory;
 
 use Exception;
-use Leickon\Action\Base as Action;
+use Leickon\Verbalize\Action;
 
 class EmptyAction extends Action
 {
