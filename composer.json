@@ -2,7 +2,6 @@
     "name": "leickon/php-verbalize",
     "type": "library",
     "license": "MIT",
-    "version": "0.0.1",
     "description": "Making classes into actions",
     "authors": [
         {
