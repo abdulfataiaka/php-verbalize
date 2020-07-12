@@ -6,7 +6,6 @@ use StdClass;
 use Exception;
 use Leickon\Action\FailureException;
 
-class RequiredException extends Exception {}
 class BadInputException extends Exception {}
 class InputRequiredException extends Exception {}
 
@@ -17,7 +16,8 @@ trait Concern {
    * @param input<array>
    * @internal
    * @return void
-   * @throws RequiredException
+   * @throws BadInputException
+   * @throws InputRequiredException
    */
   private function marshal($input)
   {
@@ -31,9 +31,13 @@ trait Concern {
 
       if(
         !is_string($name) ||
-        !preg_match('/^[A-Za-z]+?\d*?$/', $name) ||
-        ($required && !array_key_exists($name, $input))
+        !preg_match('/^[A-Za-z]+?\d*?$/', $name)
       ) throw new BadInputException($name);
+
+      if(
+        $required &&
+        !array_key_exists($name, $input)
+      ) throw new InputRequiredException($name);
 
       $this->$name = array_key_exists($name, $input)
         ? $input[$name]

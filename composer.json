@@ -13,7 +13,8 @@
     "autoload": {
         "classmap": [],
         "psr-4": {
-            "Leickon\\Action\\": "src/"
+            "Leickon\\Action\\": "src/",
+            "Leickon\\Action\\Tests\\": "tests/"
         }
     },
     "require-dev": {
